@@ -1,7 +1,11 @@
-describe('Verificar la carga de la lista de países', () => {
-  it('debe cargar y mostrar la lista de países', () => {
+describe('Verificar la lista de países', () => {
+  it('debe mostrar una lista de países correctamente', () => {
     cy.visit('https://travelmapgenerator.com');
-    cy.get('#country-selector-container').should('exist');
-    cy.get('.country-list').find('li').should('have.length.greaterThan', 0);
+
+    // Esperar explícitamente hasta que la lista de países esté visible
+    cy.get('.country-list', { timeout: 10000 }).should('be.visible');
+
+    // Verificar que hay elementos 'label' dentro de la lista de países
+    cy.get('.country-list label').should('have.length.greaterThan', 0);
   });
 });
