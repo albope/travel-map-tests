@@ -29,12 +29,12 @@ jobs:
       - name: Archive Cypress test results
         uses: actions/upload-artifact@v3
         with:
-          name: cypress-results
+          name: Test Results https://travelmapgenerator.com/
           path: cypress/results
 
       - name: Archive screenshots on failure
         if: failure()
         uses: actions/upload-artifact@v2
         with:
-          name: cypress-screenshots
+          name: Screenshots https://travelmapgenerator.com/
           path: cypress/screenshots
