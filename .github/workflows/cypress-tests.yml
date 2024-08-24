@@ -1,40 +1,40 @@
-name: Run Cypress Tests
+name: Cypress Tests
 
 on:
   schedule:
-    # Configura la ejecución para que sea cada semana (domingo a la medianoche UTC)
-    - cron: '0 0 * * 0'
-  workflow_dispatch: # Permite ejecutar manualmente el workflow desde la interfaz de GitHub
+    - cron: '0 0 * * 0' # Ejecutar semanalmente a medianoche los domingos
+  workflow_dispatch: # Permitir ejecución manual del workflow
 
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Check out code
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16' # O la versión de Node.js que uses en tu proyecto
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Run Cypress tests
-      run: npx cypress run
+      - name: Set execute permissions for Cypress
+        run: chmod +x ./node_modules/.bin/cypress
 
-    - name: Archive Cypress test results
-      if: always()
-      uses: actions/upload-artifact@v3
-      with:
-        name: cypress-results
-        path: cypress/videos/
-    
-    - name: Archive screenshots on failure
-      if: failure()
-      uses: actions/upload-artifact@v3
-      with:
-        name: cypress-screenshots
-        path: cypress/screenshots/
+      - name: Run Cypress tests
+        run: npx cypress run
+
+      - name: Archive Cypress test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: cypress-results
+          path: cypress/results
+
+      - name: Archive screenshots on failure
+        if: failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
