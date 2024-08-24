@@ -1,4 +1,4 @@
-name: Cypress Tests
+name: Cypress Tests for https://travelmapgenerator.com/
 
 on:
   schedule:
@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '14'
 
@@ -27,7 +27,7 @@ jobs:
         run: npx cypress run
 
       - name: Archive Cypress test results
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: cypress-results
           path: cypress/results
