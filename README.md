@@ -67,6 +67,10 @@ The test files are organized under the cypress/e2e directory. Each test file foc
 
 **verify_scroll_button.cy.js**: Tests the functionality of the scroll button.
 
+**verify_about_page.cy.js**: Verifies that the "About" page loads and displays the expected content.
+
+**verify_blog_page.cy.js**: Verifies that the "Blog" page loads and displays the expected content.
+
 ### Contributing
 
 Contributions are welcome! 
